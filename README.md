@@ -1,3 +1,5 @@
+# Anotações das aulas + Como esse projeto foi feito:
+
 Para instalar o pacote styled components basta digitar no terminal na pasta do projeto:
 npm install --save styled-components
 depois digite npm start, o projeto também pode ser iniciado com o yarn
@@ -127,7 +129,7 @@ No componente Extrato criamos o componente do zero:
 Primeiro, os imports do react, Box, Botao e extratoLista que está no arquivo info.js(referente a lista de informações que vamos buscar)
 Depois, como padrão criamos uma const com o nome Extrato que recebe uma arrow function e dentro desse bloco um return com o component Box, dentro do Box, fazemos um map de extratLista, para pegar as informações de { id, type, from, value, date }, dentro do map há outra arrow function com outro return com as divs que renderizam id, type e etc... Ainda dentro do Box, há também o component Botao, com o texto Ver Mais.
 
-Quando fizemos o component Itens percebemos que poderiamos fazer mais um componente para usar dentro dele. Então, criamos o componente Item. dentro dele fizemos o mesmo dos anteriores. 
+Quando fizemos o component Itens percebemos que poderiamos fazer mais um componente para usar dentro dele. Então, criamos o componente Item.jsx dentro dele fizemos o mesmo dos anteriores. 
     imports do react e styled;
     const Item que recebe o styled.div``
     export default arrow function(função anonima neste caso), return, Item(chamamos o componente abraçando as tags span para cada elemento)
@@ -137,6 +139,31 @@ Para mostrar os icones de acordo com o tipo criamos o arquivo ImageFilter.js
 Dentro dele fizemos os imports do React e dos icones que estão em "../assets/images/nomeDoAquivo.svg"
 Depois o import de import { Icone } from "../Components/UI";
  e então criamos o export default com o argumento type na arrow function e dentro variavel criamos uma lista, dentro de cada item da lista usamos o componente Icone com o src de cada icone e um alt., depois um default e para essa logica funcionar return Images[type] || Images.default;
+
+ ### Temas: modo escuro e modo claro
+
+ 1- Definimos as variáveis de cor na pasta UI, no arquivo variáveis.
+ 2- Criamos o arquivo temas.js na pasta de UI. No arquivo temas.js definimos uma variável para cada tema e importamos as variáveis de cor do arquivo variaveis.js
+ 3- Agora, no arquivo App.js fazemos os imports: import { ThemeProvider } from "styled-components";
+                                                 import { temaClaro, temaEscuro } from "./Components/UI/temas";
+
+ 4- Encapsulamos os componentes dentro do return de App com <ThemeProvider> </ThemeProvider>
+
+                    ex.: function App() {
+                    return (
+                        <ThemeProvider theme={temaEscuro}>
+                        <GlobalStyle />
+                        <Cabecalho />
+                        <Container />
+                        </ThemeProvider>
+                    );
+                    }
+
+ 5- Agora vamos refatorar essa parte no código, para começar a usar esses temas que acabamos de criar.
+      Em Container.jsx mude o background-color para ${({theme}) => theme.body}, agora depois de atualizar a página, o fundo da aplicação já deve aparecer escuro.
+      No index.js da pasta UI localizamos o componente Box e mudamos o background-color para ${({theme}) => theme.inside}
+      
+
 
   
 
