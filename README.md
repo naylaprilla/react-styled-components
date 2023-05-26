@@ -80,7 +80,7 @@ ex.:        export default () => {
         }
 ou criar um nome diferente para a estulização como por exemplo ContainerWraper
 
-Para utilizar os icones:
+### Para utilizar os icones:
   Primeiro crie um aquivo index.js na pasta UI, dentro do arquivo index.js: 
  
     import styled from "styled-components"
@@ -106,6 +106,8 @@ Para utilizar os icones:
   />
 
   faça o mesmo com os components icone, box, botão, detalhe e saldo.
+
+### Media Query
 
 As media querys podem ser adicionadas direto no styled do componente dessa forma:
     ex.:    const Conteudo = styled.section`
@@ -147,7 +149,7 @@ Depois o import de import { Icone } from "../Components/UI";
  3. Agora, no arquivo App.js fazemos os imports: import { ThemeProvider } from "styled-components";
                                                  import { temaClaro, temaEscuro } from "./Components/UI/temas";
 
- 4. Encapsulamos os componentes dentro do return de App com <ThemeProvider> </ThemeProvider>
+ 4. Encapsulamos os componentes dentro do return de App com <ThemeProvider> </ThemeProvider>(Sem o ThemeProvider a propriedade theme não será atribuída e a aplicação não conseguirá reconhecer qual tema foi selecionado)
 
                     ex.: function App() {
                     return (
@@ -171,7 +173,37 @@ Depois o import de import { Icone } from "../Components/UI";
 
  1. Dentro da pasta UI, no aruivo index.js criamos  styled componente de BtnTema
  2. Na pasta Components criamos uma pasta, SwitcherTema e dentro dela um arquivo index.jsx
- 3. 
+
+                    DICA de VSCode: Se você clicar para criar um arquivo e escrever dessa forma: SwitcherTema/index.jsx, por exemplo, o vscode vai criar uma pasta com o arquivo dentro.
+
+ 3. Faça os imports de react, dos icones ThemeOn e ThemeOff, do Icone styled component Icone(está no arquivo index.js da pasta UI)
+ 4. Agora, criamos as váriaveis de claro e escuro com Icone
+ 5. E uma função anonima export default com esse ternário: (({tema}) => (tema ? escuro : claro))
+ 6. Em App.js usamos os componentes BtnTema e dentro de BtnTema o SwitcherTema,
+ 7. Vamos usar o hook useState para que essa lógica funcione, import no react o {useState}
+ 8. Crie uma const [tema, setTema] antes do return dentro da função App(), além disso criamos a variável toggleTema, que é responsável pela troca do tema.
+    
+ ex.:   const [tema, setTema] = useState(true)
+
+        const toggleTema = () => {
+        setTema((tema) => !tema)
+        } 
+
+ 9. Em ThemeProvider mudamos o tema para um ternário theme={ tema? temaClaro : temaEscuro }
+ 10. Depois, em BtnTema adicionamos um onClick={toggleTema}
+ 11. E Por fim, em SwitcherTema adicionamos o tema={tema}
+
+ ### Ajustando a cor dos Icones
+
+  1. Em tema.js adicionamos a propriedade filter com uma string vazia em temaClaro, 
+  2. e em temaEscuro a mesma propriedade com filter: "invert(100%)",
+  3. Agora vamos para, index.js de UI e adicionamos essa váriavel:
+        export const IconeTema= styled(Icone)`
+        filter: ${({ theme }) => theme.filter}
+        ` 
+ 4. Vamos implementar no componente conta fazendo o import de IconeTema e no return da função trocando Tema por IconeTema
+ 5. Em ImageFilter.js fezemos a mesma substituição, em todos os "Tema" trocamos por IconeTema, agora essa mudança já deve ser visível na aplicação.
+
 
       
 
