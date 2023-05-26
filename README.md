@@ -57,7 +57,7 @@ Agora, basta "chamar" dentro do componente:
 
             export default Cabecalho;
 
-Criando props para os componentes:
+### Criando props para os componentes:
 
         No cabecalho foi usada dessa forma: 
         background: ${(props) => (props.primary ? "white" : corPrimaria)};
@@ -89,7 +89,7 @@ Para utilizar os icones:
     height: 25px;
     width: 25px;
     `
-  com ctrl+shift+f localize aonde o className icone está sendo usado e substitua pelo componente Icone. Não esqueça de fazer o import do componente no arquivo dessa forma>>> import { Icone } from "../../Components/UI";
+  com ctrl+shift+f localize aonde o className icone está sendo usado e substitua pelo componente Icone. Não esqueça de fazer o import do componente no arquivo dessa forma: import { Icone } from "../../Components/UI";
 
   No caso de adicionar mais estilizações(herança de estilos) é possivel usar o styled dessa forma:
 
@@ -117,7 +117,7 @@ As media querys podem ser adicionadas direto no styled do componente dessa forma
                 flex-direction: column;
                 }
             `
-Sempre que possível devemos evitar colocarmos a declaração de componentes dentro do método render dentro de componente baseados em classes e no caso de componentes funcionais não devemos declarar um componente dentro do outro.
+Sempre que possível devemos evitar colocar a declaração de componentes dentro do método render dentro de componente baseados em classes e no caso de componentes funcionais não devemos declarar um componente dentro do outro.
 
 Isso porque, caso um componente seja declarado dentro do método render ou dentro de um outro componente funcional ele será re-declarado a cada nova renderização e o React não conseguirá fazer cache desse componente, o que pode atrasar e muito a renderização da página.
 
@@ -125,29 +125,29 @@ Por isso, lembre-se de declarar seus componentes e styled components fora dos m�
 
 Para saber mais leia esse pedaço da documentação do Styled components
 
-No componente Extrato criamos o componente do zero:
-Primeiro, os imports do react, Box, Botao e extratoLista que está no arquivo info.js(referente a lista de informações que vamos buscar)
-Depois, como padrão criamos uma const com o nome Extrato que recebe uma arrow function e dentro desse bloco um return com o component Box, dentro do Box, fazemos um map de extratLista, para pegar as informações de { id, type, from, value, date }, dentro do map há outra arrow function com outro return com as divs que renderizam id, type e etc... Ainda dentro do Box, há também o component Botao, com o texto Ver Mais.
+### Componente Extrato
 
-Quando fizemos o component Itens percebemos que poderiamos fazer mais um componente para usar dentro dele. Então, criamos o componente Item.jsx dentro dele fizemos o mesmo dos anteriores. 
+No componente Extrato criamos o componente do zero:
+1. Primeiro, os imports do react, Box, Botao e extratoLista que está no arquivo info.js(referente a lista de informações que vamos buscar)
+2. Depois, como padrão criamos uma const com o nome Extrato que recebe uma arrow function e dentro desse bloco um return com o component Box, dentro do Box, fazemos um map de extratLista, para pegar as informações de { id, type, from, value, date }, dentro do map há outra arrow function com outro return com as divs que renderizam id, type e etc... Ainda dentro do Box, há também o component Botao, com o texto Ver Mais.
+3. Quando fizemos o component Itens percebemos que poderiamos fazer mais um componente para usar dentro dele. Então, criamos o componente Item.jsx dentro dele fizemos o mesmo dos anteriores. 
     imports do react e styled;
     const Item que recebe o styled.div``
     export default arrow function(função anonima neste caso), return, Item(chamamos o componente abraçando as tags span para cada elemento)
 a diferença nesse componente que para dar uma estilização a mais no primeiro span de item usamos um className .text e font-weight bold
-
-Para mostrar os icones de acordo com o tipo criamos o arquivo ImageFilter.js
+4. Para mostrar os icones de acordo com o tipo criamos o arquivo ImageFilter.js
 Dentro dele fizemos os imports do React e dos icones que estão em "../assets/images/nomeDoAquivo.svg"
 Depois o import de import { Icone } from "../Components/UI";
  e então criamos o export default com o argumento type na arrow function e dentro variavel criamos uma lista, dentro de cada item da lista usamos o componente Icone com o src de cada icone e um alt., depois um default e para essa logica funcionar return Images[type] || Images.default;
 
  ### Temas: modo escuro e modo claro
 
- 1- Definimos as variáveis de cor na pasta UI, no arquivo variáveis.
- 2- Criamos o arquivo temas.js na pasta de UI. No arquivo temas.js definimos uma variável para cada tema e importamos as variáveis de cor do arquivo variaveis.js
- 3- Agora, no arquivo App.js fazemos os imports: import { ThemeProvider } from "styled-components";
+ 1. Definimos as variáveis de cor na pasta UI, no arquivo variáveis.
+ 2. Criamos o arquivo temas.js na pasta de UI. No arquivo temas.js definimos uma variável para cada tema e importamos as variáveis de cor do arquivo variaveis.js
+ 3. Agora, no arquivo App.js fazemos os imports: import { ThemeProvider } from "styled-components";
                                                  import { temaClaro, temaEscuro } from "./Components/UI/temas";
 
- 4- Encapsulamos os componentes dentro do return de App com <ThemeProvider> </ThemeProvider>
+ 4. Encapsulamos os componentes dentro do return de App com <ThemeProvider> </ThemeProvider>
 
                     ex.: function App() {
                     return (
@@ -159,12 +159,23 @@ Depois o import de import { Icone } from "../Components/UI";
                     );
                     }
 
- 5- Agora vamos refatorar essa parte no código, para começar a usar esses temas que acabamos de criar.
-      Em Container.jsx mude o background-color para ${({theme}) => theme.body}, agora depois de atualizar a página, o fundo da aplicação já deve aparecer escuro.
-      No index.js da pasta UI localizamos o componente Box e mudamos o background-color para ${({theme}) => theme.inside}
-      No mesmo arquivo adicionamos o atributo color com ${({theme}) => theme.text} na variável Conteudo.
-      Retiramos o color:grey do arquivo GlobalStyle.js e a cor do texto já deve mudar ao atualizar a página.
-      Agora em Titulo.jsx vamos atualizar a cor para ${({theme}) => theme.text} 
+ 5. Agora vamos refatorar essa parte no código, para começar a usar esses temas que acabamos de criar.
+      * Em Container.jsx mude o background-color para ${({theme}) => theme.body}, agora depois de atualizar a página, o fundo da * aplicação já deve aparecer escuro.
+      * No index.js da pasta UI localizamos o componente Box e mudamos o background-color para ${({theme}) => theme.inside}
+      * No mesmo arquivo adicionamos o atributo color com ${({theme}) => theme.text} na variável Conteudo.
+      * Retiramos o color:grey do arquivo GlobalStyle.js e a cor do texto já deve mudar ao atualizar a página.
+      * Agora em Titulo.jsx vamos atualizar a cor para ${({theme}) => theme.text} 
+
+
+### Criando botão para a troca de temas dark/light
+
+ 1. Dentro da pasta UI, no aruivo index.js criamos  styled componente de BtnTema
+ 2. Na pasta Components criamos uma pasta, SwitcherTema e dentro dela um arquivo index.jsx
+ 3. 
+
+      
+
+
 
 
   
