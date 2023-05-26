@@ -15,6 +15,7 @@ const Conteudo = styled.section`
 display: flex;
 flex-direction: row;
 justify-content: space-between;
+color: ${({theme}) => theme.text};
 
 @media (max-width: 800px) {
   flex-direction: column;

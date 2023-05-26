@@ -162,7 +162,9 @@ Depois o import de import { Icone } from "../Components/UI";
  5- Agora vamos refatorar essa parte no código, para começar a usar esses temas que acabamos de criar.
       Em Container.jsx mude o background-color para ${({theme}) => theme.body}, agora depois de atualizar a página, o fundo da aplicação já deve aparecer escuro.
       No index.js da pasta UI localizamos o componente Box e mudamos o background-color para ${({theme}) => theme.inside}
-      
+      No mesmo arquivo adicionamos o atributo color com ${({theme}) => theme.text} na variável Conteudo.
+      Retiramos o color:grey do arquivo GlobalStyle.js e a cor do texto já deve mudar ao atualizar a página.
+      Agora em Titulo.jsx vamos atualizar a cor para ${({theme}) => theme.text} 
 
 
   
